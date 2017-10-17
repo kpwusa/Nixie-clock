@@ -48,11 +48,18 @@ void loop()
    // Serial.print(F("A"));
    // Serial.print(gps.time.value());
    // Serial.print(F(" Hour="));
-   hour_var = gps.time.hour()+7;
-   if (hour_var > 24)
+   hour_var = gps.time.hour()+7;  //time zone
+  
+      if (hour_var > 24)     //24hr correction
    {
    hour_var = hour_var-24; 
    }
+      
+      if (hour_var > 12)   //12 hr correction 
+   {
+   hour_var = hour_var-12; 
+   }   
+      
    char sz[32];
    sprintf(sz, "A%02d.%02d.%02dZ ", hour_var, gps.time.minute(), gps.time.second());
    // Serial.print(gps.time.hour());
